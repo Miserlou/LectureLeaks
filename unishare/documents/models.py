@@ -68,15 +68,12 @@ class DocumentForm(ModelForm):
             self._errors['doc_file'] = "No file supplied!"
             raise forms.ValidationError('')
 
-        if doc.size > 209715200:
-            self._errors['doc_file'] = "File too big, son!"
+        if doc.size > 2097152000:
+            self._errors['doc_file'] = "That file is too large."
             raise forms.ValidationError('')
 
-        valid_content_types = ('text/html', 'text/plain', 'text/rtf',
-                           'text/xml', 'application/msword',
-                           'application/rtf', 'application/pdf', 'application/zip')
-        valid_file_extensions = ('odt', 'pdf', 'doc', 'txt',
-                             'html', 'rtf', 'htm', 'xhtml', 'zip')
+        valid_content_types = ('audio/mpeg', 'audio/x-mpeg', 'audio/mpeg3', 'audio/x-mpeg-3', 'audio/x-caf', 'audio/3gpp')
+        valid_file_extensions = ('3gp', 'mp3', 'caf')
 
         ext = splitext(doc.name)[1][1:].lower()
         if not ext in valid_file_extensions \
@@ -95,9 +92,6 @@ class DocumentForm(ModelForm):
         self.bound_object.doc_file.save(stored_name, uploaded_file)
         self.bound_object.mimetype = uploaded_file.content_type
         self.bound_object.name = self.cleaned_data['name']
-        self.bound_object.description = self.cleaned_data['description']
-        self.bound_object.year = self.cleaned_data['year']
-        self.bound_object.semester = self.cleaned_data['semester']
         self.bound_object.school = self.cleaned_data['school'].title()
         self.bound_object.course = self.cleaned_data['course'].upper()
         self.bound_object.professor = self.cleaned_data['professor']
