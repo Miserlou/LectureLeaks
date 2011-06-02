@@ -20,8 +20,6 @@ class Document(models.Model):
 
     # Document specific
     name = models.CharField(max_length=200)
-    year = models.CharField(max_length='200', blank=True)
-    semester = models.CharField(max_length='200', blank=True)
     school = models.CharField(max_length='200', blank=False)
     course = models.CharField(max_length='200', blank=False)
     professor = models.CharField(max_length='200', blank=True)
@@ -38,9 +36,6 @@ class Document(models.Model):
     featured = models.BooleanField(default=False, blank=True)
 
     tags = TagField()
-
-    #blobs
-    description = models.TextField(blank=False) 
 
     def save(self):
         super(Document, self).save()
