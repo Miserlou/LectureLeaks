@@ -16,4 +16,6 @@ To run the server:
 `python manage.py runserver`
 
 TODO:
+    Redesign
+    Serialize Content
     Seed Content
