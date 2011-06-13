@@ -7,12 +7,12 @@ from datetime import datetime
 from tagging.models import Tag, TaggedItem
 from django.views.decorators.csrf import csrf_exempt
 
-from unishare.documents.models import Document, DocumentForm
+from unishare.documents.models import * 
 
 ## Dynamic content
 
 def root(request):
-    featureset = Document.objects.values_list('school', flat=True).order_by('school').distinct() 
+    featureset = School.objects.all()
     return render_to_response('all_schools.html', {'schools': featureset, 'cat': 'main', 'recent': get_most_recent()})
 
 def school(request, school):
@@ -54,5 +54,6 @@ def contact(request):
     return render_to_response('contact.html', {'cat': 'contact' , 'recent': get_most_recent()})
 
 ##Helper methods ##
+
 def get_most_recent():
     return Document.objects.order_by('-date')[:5]
