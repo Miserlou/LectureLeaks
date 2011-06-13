@@ -13,6 +13,7 @@ urlpatterns = patterns('',
      (r'^contact/', 'unishare.documents.views.contact'),
      (r'^school/(?P<school>[^/]+)/$', 'unishare.documents.views.school'),
      (r'^school/(?P<school>[^/]+)/course/(?P<course>[^/]+)/$', 'unishare.documents.views.school_course'),
+     (r'^api/', include('unishare.api.urls')),
 
     # Uncomment the admin/doc line below to enable admin documentation:
      (r'^admin/doc/', include('django.contrib.admindocs.urls')),

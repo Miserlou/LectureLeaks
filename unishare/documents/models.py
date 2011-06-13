@@ -22,13 +22,14 @@ class Document(models.Model):
     name = models.CharField(max_length=200)
     school = models.CharField(max_length='200', blank=False)
     course = models.CharField(max_length='200', blank=False)
+    subject = models.CharField(max_length='200', blank=False)
     professor = models.CharField(max_length='200', blank=True)
 
     # Files specific
     local_file = models.CharField(max_length='200', blank=True)
     doc_file = models.FileField(upload_to='documents', storage=attachment_file_storage)
-    file_loc = models.CharField(max_length='500', blank=True)
-    mimetype = models.CharField(max_length='500', blank=True)
+    file_loc = models.CharField(max_length='200', blank=True)
+    mp3_address = models.CharField(max_length='200', blank=True)
 
     # Meta specific
     date = models.DateTimeField('date uploaded', blank=True, default=datetime.now())
@@ -46,7 +47,7 @@ class Document(models.Model):
 
     def get_tags(self):
         return Tag.objects.get_for_object(self)
-    
+
     def __unicode__(self):
         return self.name + ' - ' + self.course + ' - ' + self.school
 
@@ -95,6 +96,7 @@ class DocumentForm(ModelForm):
         self.bound_object.school = self.cleaned_data['school'].title()
         self.bound_object.course = self.cleaned_data['course'].upper()
         self.bound_object.professor = self.cleaned_data['professor']
+        self.bound_object.subject = self.cleaned_data['subject']
         self.bound_object.date = datetime.now()
         self.bound_object.file_loc = settings.UPLOAD_HARD + s_path
         self.bound_object.save()

@@ -101,7 +101,9 @@ INSTALLED_APPS = (
      'django.contrib.admindocs',
      'tagging',
      'captcha',
+     'piston',
      'unishare.documents',
+     'unishare.api',
 )
 
 CAPTCHA_FONT_SIZE = 42

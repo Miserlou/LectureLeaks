@@ -35,6 +35,7 @@ def upload(request):
             form.save()
             return HttpResponseRedirect('/') # Redirect after POST
         else:
+            print form.errors
             print "Shiiiiit"
     else:
         form = DocumentForm() # An unbound form

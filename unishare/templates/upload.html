@@ -11,6 +11,7 @@
         $("#id_school").Watermark("ex, Boston University");
         $("#id_course").Watermark("ex, PS301");
         $("#id_professor").Watermark("ex, Dewees");
+        $("#id_subject").Watermark("ex, Neuroscience");
         });
     </script>
 							<h2 class="title"><a href="#">Upload a Document!</a></h2>
@@ -55,6 +56,16 @@
           <div class="formfield">
 		    {{ form.course}}
 		    {{ form.course.errors }}
+		  </div>
+	  </div><br>
+
+	<div class="fieldWrapper">
+          <div class="formlabel">
+	  <label for="subject">Subject</label>
+          </div>
+          <div class="formfield">
+		    {{ form.subject}}
+		    {{ form.subject.errors }}
 		  </div>
 	  </div><br>
 
