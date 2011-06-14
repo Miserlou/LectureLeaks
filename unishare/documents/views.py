@@ -6,6 +6,7 @@ from django.shortcuts import get_object_or_404, render_to_response
 from datetime import datetime
 from tagging.models import Tag, TaggedItem
 from django.views.decorators.csrf import csrf_exempt
+from django.core import serializers
 
 from unishare.documents.models import * 
 
@@ -53,7 +54,39 @@ def about(request):
 def contact(request):
     return render_to_response('contact.html', {'cat': 'contact' , 'recent': get_most_recent()})
 
+## API ##
+
+def api_schools(request):
+    json = serializers.get_serializer("json")()
+    return HttpResponse(json.serialize(School.objects.all(), ensure_ascii=False))
+
+def api_school_subjects(request, school):
+    json = serializers.get_serializer("json")()
+    schoolo = get_object_or_404(School, name=school)
+    return HttpResponse(json.serialize(Document.objects.filter(school=schoolo), ensure_ascii=False, fields=('subject'), use_natural_keys=True))
+
+def api_school_subject_courses(request, school, subject):
+    json = serializers.get_serializer("json")()
+    schoolo = get_object_or_404(School, name=school)
+    subjecto= get_object_or_404(Subject, name=subject)
+    return HttpResponse(json.serialize(Document.objects.filter(school=schoolo).filter(subject=subjecto), ensure_ascii=False, fields=('course'), use_natural_keys=True))
+
+def api_docs(request, school, subject, course):
+    json = serializers.get_serializer("json")()
+    schoolo = get_object_or_404(School, name=school)
+    subjecto= get_object_or_404(Subject, name=subject)
+    courseo = get_object_or_404(Course, name=course)
+    return HttpResponse(json.serialize(Document.objects.filter(school=schoolo).filter(subject=subjecto).filter(course=courseo), ensure_ascii=False, use_natural_keys=True))
+
 ##Helper methods ##
 
 def get_most_recent():
     return Document.objects.order_by('-date')[:5]
+
+def lookup_or_create(name, cls):
+    try:
+        obj = cls.objects.get(name=name)
+    except cls.DoesNotExist:
+        obj = cls(name=name)
+        obj.save()
+    return obj

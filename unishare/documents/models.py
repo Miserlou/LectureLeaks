@@ -19,6 +19,9 @@ class School(models.Model):
     name = models.CharField(max_length='200', blank=False)
     featured = models.BooleanField(default=False, blank=True)
 
+    def natural_key(self):
+            return (self.name)
+
     def __unicode__(self):
         return self.name
 
@@ -28,11 +31,17 @@ class Subject(models.Model):
     def __unicode__(self):
         return self.name
 
+    def natural_key(self):
+            return (self.name)
+
 class Course(models.Model):
     name = models.CharField(max_length='200', blank=False)
 
     def __unicode__(self):
         return self.name
+    
+    def natural_key(self):
+            return (self.name)
 
 # Create your models here.
 class Document(models.Model):
