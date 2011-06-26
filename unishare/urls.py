@@ -1,10 +1,10 @@
 from django.conf.urls.defaults import *
 from django.conf import settings
-from tastypie.resources import ModelResource
+#from tastypie.resources import ModelResource
 from documents.models import *
 
-from djangorestframework.views import ListOrCreateModelView, InstanceModelView
-from djangorestframework.resources import ModelResource
+#from djangorestframework.views import ListOrCreateModelView, InstanceModelView
+#from djangorestframework.resources import ModelResource
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
@@ -14,6 +14,7 @@ urlpatterns = patterns('',
      (r'^captcha/', include('captcha.urls')),
      (r'^unishare/', include('unishare.documents.urls')),
      (r'^upload/', 'unishare.documents.views.upload'),
+     (r'^uploadnocaptcha/', 'unishare.documents.views.uploadnocaptcha'),
      (r'^about/', 'unishare.documents.views.about'),
      (r'^contact/', 'unishare.documents.views.contact'),
      (r'^school/(?P<school>[^/]+)/$', 'unishare.documents.views.school'),

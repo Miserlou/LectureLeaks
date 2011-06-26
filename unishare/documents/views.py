@@ -17,11 +17,14 @@ def root(request):
     return render_to_response('all_schools.html', {'schools': featureset, 'cat': 'main', 'recent': get_most_recent()})
 
 def school(request, school):
-    featureset = Document.objects.values_list('course', flat=True).filter(school=school).order_by('course').distinct() 
+    schoolo = get_object_or_404(School, name=school)
+    featureset = Document.objects.values_list('course', flat=True).filter(school=schoolo).order_by('course').distinct() 
     return render_to_response('by_school.html', {'classes': featureset, 'cat': 'main', 'school': school , 'recent': get_most_recent()})
 
 def school_course(request, school, course):
-    featureset = Document.objects.all().filter(school=school, course=course).order_by('name')
+    schoolo = get_object_or_404(School, name=school)
+    courseo = get_object_or_404(Course, name=course)
+    featureset = Document.objects.all().filter(school=schoolo, course=courseo).order_by('name')
     return render_to_response('by_school_course.html', {'documents': featureset, 'cat': 'main', 'school': school, 'course': course , 'recent': get_most_recent()})
 
 ## Forms ##
@@ -47,6 +50,27 @@ def upload(request):
         'recent': get_most_recent()
     })
 
+def uploadnocaptcha(request):
+    if request.method == 'POST': # If the form has been submitted...
+        form = DocumentNoCaptchaForm(request.POST, request.FILES) # A form bound to the POST data
+        if form.is_valid(): # All validation rules pass
+            # Process the data in form.cleaned_data
+            # XXX: Check filetypes, etc
+
+            form.save()
+            return HttpResponseRedirect('/') # Redirect after POST
+        else:
+            print form.errors
+            print "Shiiiiit"
+    else:
+        form = DocumentNoCaptchaForm() # An unbound form
+
+    return render_to_response('upload_nocaptcha.html', {
+        'form': form,
+        'cat': 'upload' ,
+        'recent': get_most_recent()
+    })
+
 ## Static ##
 def about(request):
     return render_to_response('about.html', {'cat': 'about' , 'recent': get_most_recent()})
@@ -63,7 +87,12 @@ def api_schools(request):
 def api_school_subjects(request, school):
     json = serializers.get_serializer("json")()
     schoolo = get_object_or_404(School, name=school)
-    return HttpResponse(json.serialize(Document.objects.filter(school=schoolo), ensure_ascii=False, fields=('subject'), use_natural_keys=True))
+    #return HttpResponse(json.serialize(Document.objects.filter(school=schoolo), ensure_ascii=False, fields=('subject'), use_natural_keys=True))
+    
+    print Document.objects.select_related().filter(school=schoolo).values('subject').distinct()
+    
+    #return HttpResponse(json.serialize(Document.objects.select_related().filter(school=schoolo).values('subject').distinct(), ensure_ascii=False, fields=('subject'), use_natural_keys=True))
+    return HttpResponse(json.dumps(Document.objects.select_related().filter(school=schoolo).values('subject').distinct(), ensure_ascii=False, fields=('subject'), use_natural_keys=True))
 
 def api_school_subject_courses(request, school, subject):
     json = serializers.get_serializer("json")()

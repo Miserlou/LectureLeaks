@@ -1,0 +1,107 @@
+{% extends "index.html" %}
+{% block bodyblock %}
+<div class="post">
+					<div class="post-bgtop">
+						<div class="post-bgbtm">
+    <script src="/static/jquery/jquery.watermarkinput.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        jQuery(function($){
+        $("#id_name").Watermark("ex, Motor Neurons");
+        $("#id_desc").Watermark("ex, A mirror neuron is a neuron that fires both when an animal acts and when the animal observes the same action performed by another.");
+        $("#id_school").Watermark("ex, Boston University");
+        $("#id_course").Watermark("ex, PS301");
+        $("#id_professor").Watermark("ex, Dewees");
+        $("#id_subject").Watermark("ex, Neuroscience");
+        });
+    </script>
+							<h2 class="title"><a href="#">Upload a Document!</a></h2>
+                    <p><small>By uploading, you agree to release your documents under the Creative Commons attribution license, so that anybody may share it with anybody else.</small>
+                    <p><form enctype="multipart/form-data" action="/uploadnocaptcha/" method="post">
+    {% csrf_token %}
+
+		<div class="fieldWrapper">
+          <div class="formlabel">
+		    <label for="doc_file">Document</label>
+          </div>
+          <div class="formfield">
+		    {{ form.doc_file}}
+		    {{ form.doc_file.errors }}
+		  </div>
+	  </div><br>
+
+		<div class="fieldWrapper">
+          <div class="formlabel">
+		  <label for="name">Title</label>
+          </div>
+          <div class="formfield">
+		  {{ form.name}}
+		  {{ form.name.errors }}
+		  </div>
+	  </div><br>
+
+		<div class="fieldWrapper">
+          <div class="formlabel">
+		    <label for="year">School</label>
+          </div>
+          <div class="formfield">
+		    {{ form.school}}
+		    {{ form.school.errors }}
+		  </div>
+	  </div><br>
+
+		<div class="fieldWrapper">
+          <div class="formlabel">
+		  <label for="year">Course</label>
+          </div>
+          <div class="formfield">
+		    {{ form.course}}
+		    {{ form.course.errors }}
+		  </div>
+	  </div><br>
+
+	<div class="fieldWrapper">
+          <div class="formlabel">
+	  <label for="subject">Subject</label>
+          </div>
+          <div class="formfield">
+		    {{ form.subject}}
+		    {{ form.subject.errors }}
+		  </div>
+	  </div><br>
+
+		<div class="fieldWrapper">
+          <div class="formlabel">
+		  <label for="year">Professor</label>
+          </div>
+          <div class="formfield">
+		    {{ form.professor}}
+		    {{ form.professor.errors }}
+		  </div>
+	  </div><br>
+
+        {% if form.captcha %}
+		<div class="fieldWrapper">
+          <div class="formlabel">
+		    <label for="location">Verification</label>
+          </div>
+          <div class="formfield">
+		    {{ form.captcha}}
+		    {{ form.captcha.errors }}
+		  </div>
+	  </div><br>
+        {%endif%}
+      <div class="fieldWrapper">
+          <div class="formlabel">
+		    <!--just a space-->
+		    &nbsp;
+          </div>
+          <div class="formfield">
+		    <input type="submit" value="Upload!" />
+		  </div>
+	  </div><br><br><br><br><br>
+</form>
+							</div>
+						</div>
+					</div>
+				</div>
+{% endblock %}

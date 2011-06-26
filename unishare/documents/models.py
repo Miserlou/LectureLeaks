@@ -16,17 +16,17 @@ import re
 attachment_file_storage = FileSystemStorage(location=settings.UPLOAD_ROOT, base_url='documents')
 
 class School(models.Model):
-    name = models.CharField(max_length='200', blank=False)
+    name = models.CharField(max_length='200', blank=False, unique=True)
     featured = models.BooleanField(default=False, blank=True)
 
     def natural_key(self):
-            return (self.name)
+        return (self.name)
 
     def __unicode__(self):
         return self.name
 
 class Subject(models.Model):
-    name = models.CharField(max_length='200', blank=False)
+    name = models.CharField(max_length='200', blank=False, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -35,7 +35,7 @@ class Subject(models.Model):
             return (self.name)
 
 class Course(models.Model):
-    name = models.CharField(max_length='200', blank=False)
+    name = models.CharField(max_length='200', blank=False, unique=True)
 
     def __unicode__(self):
         return self.name
@@ -77,7 +77,61 @@ class Document(models.Model):
         return Tag.objects.get_for_object(self)
 
     def __unicode__(self):
-        return self.name + ' - ' + self.course + ' - ' + self.school
+        return self.name + ' - ' + self.course.name + ' - ' + self.school.name
+
+class DocumentNoCaptchaForm(ModelForm):
+    school = forms.CharField(max_length=100)
+    course = forms.CharField(max_length=100)
+    subject = forms.CharField(max_length=100)
+
+    class Meta:
+        model = Document
+        exclude = ('school', 'course', 'subject')
+
+    #def __init__(self, bound_object=None, *args, **kwargs):
+    #    super(RecordingForm, self).__init__(*args, **kwargs)
+    #    self.bound_object = bound_object
+    #    self.is_updating = False
+    #    if self.bound_object:
+    #        self.is_updating = True
+
+    def clean(self):
+        doc = self.cleaned_data.get('doc_file',None)
+        if doc is None:
+            self._errors['doc_file'] = "No file supplied!"
+            raise forms.ValidationError('')
+
+        if doc.size > 2097152000:
+            self._errors['doc_file'] = "That file is too large."
+            raise forms.ValidationError('')
+
+        valid_content_types = ('audio/mpeg', 'audio/x-mpeg', 'audio/mpeg3', 'audio/x-mpeg-3', 'audio/x-caf', 'audio/3gpp')
+        valid_file_extensions = ('3gp', 'mp3', 'caf')
+
+        ext = splitext(doc.name)[1][1:].lower()
+        if not ext in valid_file_extensions \
+           and not doc.content_type in valid_content_types:
+            self._errors['doc_file'] = "Sorry, this is not a valid file-type."
+            raise forms.ValidationError('')
+
+        return self.cleaned_data
+
+    def save(self):
+        self.bound_object = Document()
+        uploaded_file = self.cleaned_data['doc_file']
+        s_time = str(time())
+        s_path = s_time + re.sub(r'[^a-zA-Z0-9._]+', '-', uploaded_file.name)
+        stored_name = s_time + re.sub(r'[^a-zA-Z0-9._]+', '-', uploaded_file.name)
+        self.bound_object.mimetype = uploaded_file.content_type
+        self.bound_object.name = self.cleaned_data['name']
+        self.bound_object.school = lookup_or_create(self.cleaned_data['school'].title(), School)
+        self.bound_object.course = lookup_or_create(self.cleaned_data['course'].upper(), Course)
+        self.bound_object.professor = self.cleaned_data['professor']
+        self.bound_object.subject = lookup_or_create(self.cleaned_data['subject'], Subject)
+        self.bound_object.date = datetime.now()
+        self.bound_object.file_loc = settings.UPLOAD_HARD + s_path
+        self.bound_object.doc_file.save(stored_name, uploaded_file)
+        self.bound_object.save()
 
 class DocumentForm(ModelForm):
     school = forms.CharField(max_length=100)
