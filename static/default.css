@@ -11,11 +11,11 @@ Released for free under a Creative Commons Attribution 2.5 License
 }
 
 body {
-	background: #789DC3 url('/static/texture.png') repeat left top;
+	background: url("/static/drips.png") repeat-x 0px 120px, #789DC3 url('/static/texture.png') repeat left top;
 	text-align: justify;
 	font-family: Georgia, serif;
 	font-size: 15px;
-	color: #757E82;
+	color: #281E47;
 }
 
 h1, h2, h3 {
@@ -105,7 +105,7 @@ table tfoot td .bulk-actions select {
 #wrapper2 {
 	margin: 0 auto;
 	border-bottom: 4px solid #281E47;
-	background: #467093;
+	background: url("/static/drips2.png") repeat-x 0px 70px, #467093;
 }
 
 /* Header */
@@ -113,7 +113,6 @@ table tfoot td .bulk-actions select {
 #header {
 	height: 140px;
 	margin: 0 auto;
-	background: #467093;
 	width: 960px;
 }
 
@@ -144,9 +143,10 @@ table tfoot td .bulk-actions select {
 
 #largelink a {
 	text-decoration: underline;
-	color: #000000;
-    font-size: 22px;
-    padding:3px;
+	color: #5d45a4;
+  font-size: 22px;
+	font-weight: bold;
+  padding:3px;
 }
 
 #logo h2 a {
@@ -162,7 +162,7 @@ table tfoot td .bulk-actions select {
 
 #menu {
 	float: right;
-	width: 400px;
+	width: 500px;
 	height: 90px;
 	margin-top:32px;
 }
@@ -189,28 +189,35 @@ table tfoot td .bulk-actions select {
 	letter-spacing: -1px;
 	text-decoration: none;
 	text-align: center;
-	text-transform: lowercase;
 	font-family: Georgia, serif;
-	font-size: 24px;
+	font-size: 28px;
 	font-weight: normal;
 	color: #fff;
+	text-shadow: 0px -1px #281e47;
+	padding-left:10px;
+	padding-right:10px;
+
 }
 
 #menu a:hover, #menu .active a {
-	background: #ffffff url(images/img02.jpg) repeat-x left bottom;
-	color: #000000;
+	background: #ffffff;
+	color: #281E47;
+  box-shadow: 0px 2px 2px #000;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
 }
 
 /* Search */
 
 #search {
-	padding: 10px 10px 40px 10px;
+	padding: 40px 40px 40px 40px;
 	background: #fffff8;
   -moz-box-shadow: 0 8px 8px #000;
   -webkit-box-shadow: 0 8px 8px #000;
   box-shadow: 0px 8px 8px #000;
   border-radius: 10px;
   -moz-border-radius: 10px;
+	width: 200px;
 
 }
 
@@ -233,7 +240,7 @@ table tfoot td .bulk-actions select {
 #search-text {
 	width: 100px;
 	border: 1px solid #000000;
-	color: #000000;
+	color: #281E47;
 }
 
 #search-submit {
@@ -280,7 +287,7 @@ table tfoot td .bulk-actions select {
 .post .title {
 	margin: 0px;
 	padding: 0px 0px 5px 0px;
-	color: #232F01;
+	color: #281E47;
 }
 
 .post .title a {
@@ -289,7 +296,7 @@ table tfoot td .bulk-actions select {
 	text-transform: lowercase;
 	font-weight: normal;
 	font-size: 32px;
-	color: #3A3D40;
+	color: #281E47;
 }
 
 .post .entry {
@@ -333,7 +340,7 @@ table tfoot td .bulk-actions select {
 }
 
 #sidebar-bgbtm {
-	padding: 40px 40px 20px 40px;
+	padding: 30px 20px 20px 20px;
 }
 
 #sidebar ul {
@@ -368,7 +375,7 @@ table tfoot td .bulk-actions select {
 	text-transform: lowercase;
 	font-size: 180%;
 	font-weight: normal;
-	color: #454E55;
+	color: #281E47;
 }
 
 #sidebar h3 {
@@ -379,13 +386,13 @@ table tfoot td .bulk-actions select {
 #sidebar p {
 	margin: 0;
 	line-height: normal;
-	color: #D4C792;
+	color: #281E47;
 }
 
 #sidebar a {
 	border: none;
 	text-decoration: none;
-	color: #757E82;
+	color: #281E47;
 }
 
 #sidebar a:hover {
@@ -415,6 +422,7 @@ table tfoot td .bulk-actions select {
 	padding: 20px 0px;
 	border-top: 4px solid #281E47;
 	color: #fff;
+	height:200px;
 }
 
 #footer {
