@@ -11,9 +11,9 @@ Released for free under a Creative Commons Attribution 2.5 License
 }
 
 body {
-	background: #FFFFFF url(images/img01.jpg) repeat-x left top;
+	background: #789DC3 url('/static/texture.png') repeat left top;
 	text-align: justify;
-	font-family: Helvetica, Geneva, sans-serif;
+	font-family: Georgia, serif;
 	font-size: 15px;
 	color: #757E82;
 }
@@ -50,7 +50,7 @@ ul, ol, li {
 
 a {
 	text-decoration: underline;
-	color: #ff0000;
+	color: #000000;
 }
 
 a:hover {
@@ -96,14 +96,25 @@ table tfoot td .bulk-actions select {
 /* Wrapper */
 
 #wrapper {
+	width:100%;
+	margin: 0 auto;
+}
+
+/* Wrapper2 */
+
+#wrapper2 {
+	margin: 0 auto;
+	border-bottom: 4px solid #281E47;
+	background: #467093;
 }
 
 /* Header */
 
 #header {
-	width: 900px;
 	height: 140px;
 	margin: 0 auto;
+	background: #467093;
+	width: 960px;
 }
 
 /* Logo */
@@ -112,7 +123,7 @@ table tfoot td .bulk-actions select {
 	float: left;
 	width: 270px;
 	height: 76px;
-	margin: 0px;
+	margin: 0 auto;
 	padding: 15px 0px 0px 30px;
 }
 
@@ -128,12 +139,12 @@ table tfoot td .bulk-actions select {
 	letter-spacing: 2px;
 	font-size: 10px;
 	font-weight: normal;
-	color: #D9170E;
+	color: #000000;
 }
 
 #largelink a {
 	text-decoration: underline;
-	color: #ff0000;
+	color: #000000;
     font-size: 22px;
     padding:3px;
 }
@@ -144,15 +155,16 @@ table tfoot td .bulk-actions select {
 
 #logo a {
 	text-decoration: none;
-	color: #D9170E;
+	color: #ffffff;
 }
 
 /* Menu */
 
 #menu {
 	float: right;
-	width: 592px;
+	width: 400px;
 	height: 90px;
+	margin-top:32px;
 }
 
 #menu ul {
@@ -173,26 +185,33 @@ table tfoot td .bulk-actions select {
 	float: left;
 	height: 55px;
 	margin-right: 1px;
-	padding: 35px 20px 0px 20px;
+	padding: 3px 2px 0px 2px;
 	letter-spacing: -1px;
 	text-decoration: none;
 	text-align: center;
 	text-transform: lowercase;
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: Georgia, serif;
 	font-size: 24px;
 	font-weight: normal;
-	color: #383B3F;
+	color: #fff;
 }
 
 #menu a:hover, #menu .active a {
-	background: #D9170E url(images/img02.jpg) repeat-x left bottom;
-	color: #FFFFFF;
+	background: #ffffff url(images/img02.jpg) repeat-x left bottom;
+	color: #000000;
 }
 
 /* Search */
 
 #search {
-	padding: 0px 0px 40px 0px;
+	padding: 10px 10px 40px 10px;
+	background: #fffff8;
+  -moz-box-shadow: 0 8px 8px #000;
+  -webkit-box-shadow: 0 8px 8px #000;
+  box-shadow: 0px 8px 8px #000;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+
 }
 
 #search form {
@@ -208,7 +227,6 @@ table tfoot td .bulk-actions select {
 
 #search input {
 	float: left;
-	font: 11px Tahoma, Geneva, sans-serif;
 	padding: 2px 2px;
 }
 
@@ -243,15 +261,19 @@ table tfoot td .bulk-actions select {
 }
 
 .post {
-	background: url(images/img05.jpg) repeat-y left top;
+  -moz-box-shadow: 0 8px 8px #000;
+  -webkit-box-shadow: 0 8px 8px #000;
+  box-shadow: 0px 8px 8px #000;
+  border-radius: 10px;
+  -moz-border-radius: 10px;
+	background: #fffff8;
+	margin-top: 32px;
 }
 
 .post-bgtop {
-	background: url(images/img04.jpg) no-repeat left top;
 }
 
 .post-bgbtm {
-	background: url(images/img06.jpg) no-repeat left bottom;
 	padding: 50px 40px 30px 40px;
 }
 
@@ -265,7 +287,6 @@ table tfoot td .bulk-actions select {
 	letter-spacing: -1px;
 	text-decoration: none;
 	text-transform: lowercase;
-	font-family: Arial, Helvetica, sans-serif;
 	font-weight: normal;
 	font-size: 32px;
 	color: #3A3D40;
@@ -287,11 +308,9 @@ table tfoot td .bulk-actions select {
 	width: 115px;
 	height: 32px;
 	padding: 8px 0px 0px 0px;
-	background: url(images/img12.jpg) no-repeat left top;
 	text-align: center;
 	text-transform: uppercase;
 	text-decoration: none;
-	font-family: Tahoma, Geneva, sans-serif;
 	font-size: 11px;
 	font-weight: normal;
 	color: #FFFFFF;
@@ -307,16 +326,13 @@ table tfoot td .bulk-actions select {
 #sidebar {
 	float: right;
 	width: 260px;
-	background: url(images/img08.jpg) repeat-y left top;
 	font-size: 13px;
 }
 
 #sidebar-bgtop {
-	background: url(images/img07.jpg) no-repeat left top;
 }
 
 #sidebar-bgbtm {
-	background: url(images/img09.jpg) no-repeat left bottom;
 	padding: 40px 40px 20px 40px;
 }
 
@@ -340,12 +356,9 @@ table tfoot td .bulk-actions select {
 	margin: 0;
 	padding: 7px 0px;
 	border: none;
-	background: url(images/img10.jpg) repeat-x left bottom;
-	font-family: Tahoma, Geneva, sans-serif;
 }
 
 #sidebar li li a {
-	background: url(images/img11.jpg) no-repeat left 3px;
 	padding-left: 20px;
 }
 
@@ -353,7 +366,6 @@ table tfoot td .bulk-actions select {
 	margin: 0px;
 	padding: 0px 0px 20px 0px;
 	text-transform: lowercase;
-	font-family: Arial, Helvetica, sans-serif;
 	font-size: 180%;
 	font-weight: normal;
 	color: #454E55;
@@ -384,6 +396,7 @@ table tfoot td .bulk-actions select {
 /* Submenu */
 
 #submenu {
+	background: #fff;
 }
 
 /* News */
@@ -398,14 +411,16 @@ table tfoot td .bulk-actions select {
 /* Footer */
 
 #footer-wrapper {
-	background: #F7F7F7 url(images/img03.jpg) repeat-x left top;
+	background: #467093;
 	padding: 20px 0px;
+	border-top: 4px solid #281E47;
+	color: #fff;
 }
 
 #footer {
 	width: 900px;
 	margin: 0 auto;
-	color: #757E82;
+	background: #467093;
 }
 
 #footer p {
@@ -416,7 +431,8 @@ table tfoot td .bulk-actions select {
 
 #footer a {
 	text-decoration: underline;
-	color: #757E82;
+	color: #fff;
+  font-weight: bold;
 }
 
 #footer a:hover {
