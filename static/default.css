@@ -150,7 +150,9 @@ table tfoot td .bulk-actions select {
 }
 
 #logo h2 a {
-	color: #9AA9B1;
+	color: #ffffff;
+	font-size: 18px;
+	text-shadow: 0px -1px #281e47;
 }
 
 #logo a {
@@ -163,8 +165,6 @@ table tfoot td .bulk-actions select {
 #menu {
 	float: right;
 	width: 500px;
-	height: 90px;
-	margin-top:32px;
 }
 
 #menu ul {
@@ -183,9 +183,10 @@ table tfoot td .bulk-actions select {
 #menu a {
 	display: block;
 	float: left;
-	height: 55px;
+	height: 100px;
 	margin-right: 1px;
 	padding: 3px 2px 0px 2px;
+	padding-top:30px;
 	letter-spacing: -1px;
 	text-decoration: none;
 	text-align: center;
@@ -200,11 +201,7 @@ table tfoot td .bulk-actions select {
 }
 
 #menu a:hover, #menu .active a {
-	background: #ffffff;
-	color: #281E47;
-  box-shadow: 0px 2px 2px #000;
-  border-radius: 10px;
-  -moz-border-radius: 10px;
+	background: url("/static/bigdrip.png") no-repeat 30px -5px;
 }
 
 /* Search */
@@ -293,7 +290,6 @@ table tfoot td .bulk-actions select {
 .post .title a {
 	letter-spacing: -1px;
 	text-decoration: none;
-	text-transform: lowercase;
 	font-weight: normal;
 	font-size: 32px;
 	color: #281E47;
@@ -372,7 +368,6 @@ table tfoot td .bulk-actions select {
 #sidebar h2 {
 	margin: 0px;
 	padding: 0px 0px 20px 0px;
-	text-transform: lowercase;
 	font-size: 180%;
 	font-weight: normal;
 	color: #281E47;
@@ -418,7 +413,7 @@ table tfoot td .bulk-actions select {
 /* Footer */
 
 #footer-wrapper {
-	background: #467093;
+	background: url("/static/drips3.png") repeat-x 0px 0px, #467093;
 	padding: 20px 0px;
 	border-top: 4px solid #281E47;
 	color: #fff;
@@ -428,13 +423,13 @@ table tfoot td .bulk-actions select {
 #footer {
 	width: 900px;
 	margin: 0 auto;
-	background: #467093;
 }
 
 #footer p {
 	margin: 0;
 	text-align: center;
-	font-size: 13px;
+	font-size: 18px;
+	text-shadow: 0px -1px #281e47;
 }
 
 #footer a {
