@@ -7,6 +7,7 @@ from datetime import datetime
 from tagging.models import Tag, TaggedItem
 from django.views.decorators.csrf import csrf_exempt
 from django.core import serializers
+import json
 
 from unishare.documents.models import * 
 
@@ -18,13 +19,20 @@ def root(request):
 
 def school(request, school):
     schoolo = get_object_or_404(School, name=school)
-    featureset = Document.objects.values_list('course', flat=True).filter(school=schoolo).order_by('course').distinct() 
+    featureset = Document.objects.filter(school=schoolo).values('subject__name').distinct()
     return render_to_response('by_school.html', {'classes': featureset, 'cat': 'main', 'school': school , 'recent': get_most_recent()})
 
-def school_course(request, school, course):
+def school_subject(request, school, subject):
     schoolo = get_object_or_404(School, name=school)
-    courseo = get_object_or_404(Course, name=course)
-    featureset = Document.objects.all().filter(school=schoolo, course=courseo).order_by('name')
+    subjecto = get_object_or_404(Subject, name=subject)
+    featureset = Document.objects.filter(school=schoolo, subject=subjecto).values('course__name').distinct()
+    return render_to_response('by_school_subject.html', {'classes': featureset, 'cat': 'main', 'school': school, 'subject': subject, 'recent': get_most_recent()})
+
+def school_subject_course(request, school, subject, course):
+    schoolo = get_object_or_404(School, name=school)
+    subjecto = get_object_or_404(Subject, name=subject)
+    courseo= get_object_or_404(Course, name=course)
+    featureset = Document.objects.all().filter(school=schoolo, subject=subjecto, course=courseo).order_by('name')
     return render_to_response('by_school_course.html', {'documents': featureset, 'cat': 'main', 'school': school, 'course': course , 'recent': get_most_recent()})
 
 ## Forms ##
@@ -87,25 +95,23 @@ def api_schools(request):
 def api_school_subjects(request, school):
     json = serializers.get_serializer("json")()
     schoolo = get_object_or_404(School, name=school)
-    #return HttpResponse(json.serialize(Document.objects.filter(school=schoolo), ensure_ascii=False, fields=('subject'), use_natural_keys=True))
-    
-    print Document.objects.select_related().filter(school=schoolo).values('subject').distinct()
-    
-    #return HttpResponse(json.serialize(Document.objects.select_related().filter(school=schoolo).values('subject').distinct(), ensure_ascii=False, fields=('subject'), use_natural_keys=True))
-    return HttpResponse(json.dumps(Document.objects.select_related().filter(school=schoolo).values('subject').distinct(), ensure_ascii=False, fields=('subject'), use_natural_keys=True))
+    to_serialize = Document.objects.filter(school=schoolo).values('subject__name').distinct()
+    return HttpResponse(str(to_serialize))
 
 def api_school_subject_courses(request, school, subject):
     json = serializers.get_serializer("json")()
     schoolo = get_object_or_404(School, name=school)
     subjecto= get_object_or_404(Subject, name=subject)
-    return HttpResponse(json.serialize(Document.objects.filter(school=schoolo).filter(subject=subjecto), ensure_ascii=False, fields=('course'), use_natural_keys=True))
+    to_serialize = Document.objects.filter(school=schoolo).filter(subject=subjecto).values('course__name').distinct()
+    return HttpResponse(str(to_serialize))
 
 def api_docs(request, school, subject, course):
     json = serializers.get_serializer("json")()
     schoolo = get_object_or_404(School, name=school)
     subjecto= get_object_or_404(Subject, name=subject)
     courseo = get_object_or_404(Course, name=course)
-    return HttpResponse(json.serialize(Document.objects.filter(school=schoolo).filter(subject=subjecto).filter(course=courseo), ensure_ascii=False, use_natural_keys=True))
+    to_serialize = Document.objects.filter(school=schoolo).filter(subject=subjecto).filter(course=courseo)
+    return HttpResponse(json.serialize(to_serialize))
 
 ##Helper methods ##
 
