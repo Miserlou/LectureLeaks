@@ -101,18 +101,18 @@ class DocumentNoCaptchaForm(ModelForm):
             self._errors['doc_file'] = "No file supplied!"
             raise forms.ValidationError('')
 
-        if doc.size > 2097152000:
-            self._errors['doc_file'] = "That file is too large."
-            raise forms.ValidationError('')
+        #if doc.size > 2097152000:
+        #    self._errors['doc_file'] = "That file is too large."
+        #    raise forms.ValidationError('')
 
-        valid_content_types = ('audio/mpeg', 'audio/x-mpeg', 'audio/mpeg3', 'audio/x-mpeg-3', 'audio/x-caf', 'audio/3gpp')
-        valid_file_extensions = ('3gp', 'mp3', 'caf')
+        #valid_content_types = ('audio/mpeg', 'audio/x-mpeg', 'audio/mpeg3', 'audio/x-mpeg-3', 'audio/x-caf', 'audio/3gpp')
+        #valid_file_extensions = ('3gp', 'mp3', 'caf')
 
-        ext = splitext(doc.name)[1][1:].lower()
-        if not ext in valid_file_extensions \
-           and not doc.content_type in valid_content_types:
-            self._errors['doc_file'] = "Sorry, this is not a valid file-type."
-            raise forms.ValidationError('')
+        #ext = splitext(doc.name)[1][1:].lower()
+        #if not ext in valid_file_extensions \
+        #   and not doc.content_type in valid_content_types:
+        #    self._errors['doc_file'] = "Sorry, this is not a valid file-type."
+        #    raise forms.ValidationError('')
 
         return self.cleaned_data
 
@@ -156,18 +156,18 @@ class DocumentForm(ModelForm):
             self._errors['doc_file'] = "No file supplied!"
             raise forms.ValidationError('')
 
-        if doc.size > 2097152000:
-            self._errors['doc_file'] = "That file is too large."
-            raise forms.ValidationError('')
+        #if doc.size > 2097152000:
+        #    self._errors['doc_file'] = "That file is too large."
+        #    raise forms.ValidationError('')
 
-        valid_content_types = ('audio/mpeg', 'audio/x-mpeg', 'audio/mpeg3', 'audio/x-mpeg-3', 'audio/x-caf', 'audio/3gpp')
-        valid_file_extensions = ('3gp', 'mp3', 'caf')
+        #valid_content_types = ('audio/mpeg', 'audio/x-mpeg', 'audio/mpeg3', 'audio/x-mpeg-3', 'audio/x-caf', 'audio/3gpp')
+        #valid_file_extensions = ('3gp', 'mp3', 'caf')
 
-        ext = splitext(doc.name)[1][1:].lower()
-        if not ext in valid_file_extensions \
-           and not doc.content_type in valid_content_types:
-            self._errors['doc_file'] = "Sorry, this is not a valid file-type."
-            raise forms.ValidationError('')
+        #ext = splitext(doc.name)[1][1:].lower()
+        #if not ext in valid_file_extensions \
+        #   and not doc.content_type in valid_content_types:
+        #    self._errors['doc_file'] = "Sorry, this is not a valid file-type."
+        #    raise forms.ValidationError('')
 
         return self.cleaned_data
 
