@@ -56,7 +56,7 @@ def upload(request):
         'form': form,
         'cat': 'upload' ,
         'recent': get_most_recent()
-    })
+    }, context_instance=RequestContext(request))
 
 def uploadnocaptcha(request):
     if request.method == 'POST': # If the form has been submitted...
@@ -77,7 +77,7 @@ def uploadnocaptcha(request):
         'form': form,
         'cat': 'upload' ,
         'recent': get_most_recent()
-    })
+    }, context_instance=RequestContext(request))
 
 ## Static ##
 def about(request):
