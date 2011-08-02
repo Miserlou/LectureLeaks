@@ -180,7 +180,7 @@ class DocumentForm(ModelForm):
         self.bound_object.mimetype = uploaded_file.content_type
         self.bound_object.name = self.cleaned_data['name']
         self.bound_object.school = lookup_or_create(self.cleaned_data['school'].title(), School)
-        self.bound_object.course = lookup_or_create(self.cleaned_data['course'].upper(), Course)
+        self.bound_object.course = lookup_or_create(self.cleaned_data['course'], Course)
         self.bound_object.professor = self.cleaned_data['professor']
         self.bound_object.subject = lookup_or_create(self.cleaned_data['subject'], Subject)
         self.bound_object.date = datetime.now()
