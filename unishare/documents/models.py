@@ -61,7 +61,7 @@ class Document(models.Model):
 
     # Meta specific
     date = models.DateTimeField('date uploaded', blank=True, default=datetime.now())
-    approved = models.BooleanField(default=True, blank=True)
+    approved = models.BooleanField(default=False, blank=True)
     featured = models.BooleanField(default=False, blank=True)
 
     tags = TagField()
