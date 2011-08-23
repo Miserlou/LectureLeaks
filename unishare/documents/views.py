@@ -58,6 +58,7 @@ def upload(request):
         'recent': get_most_recent()
     }, context_instance=RequestContext(request))
 
+@csrf_exempt
 def uploadnocaptcha(request):
     if request.method == 'POST': # If the form has been submitted...
         form = DocumentNoCaptchaForm(request.POST, request.FILES) # A form bound to the POST data
