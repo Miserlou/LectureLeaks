@@ -14,7 +14,7 @@ from unishare.documents.models import *
 ## Dynamic content
 
 def root(request):
-    featureset = School.objects.all()
+    featureset = School.objects.all().filter(featured=True)
     return render_to_response('all_schools.html', {'schools': featureset, 'cat': 'main', 'recent': get_most_recent()})
 
 def school(request, school):
@@ -91,7 +91,7 @@ def contact(request):
 
 def api_schools(request):
     json = serializers.get_serializer("json")()
-    return HttpResponse(json.serialize(School.objects.all(), ensure_ascii=False))
+    return HttpResponse(json.serialize(School.objects.all().filter(featured=True), ensure_ascii=False))
 
 def api_school_subjects(request, school):
     json = serializers.get_serializer("json")()
