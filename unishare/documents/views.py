@@ -84,6 +84,9 @@ def uploadnocaptcha(request):
 def about(request):
     return render_to_response('about.html', {'cat': 'about' , 'recent': get_most_recent()})
 
+def apps(request):
+	return render_to_response('apps.html', {'cat': 'apps' , 'recent': get_most_recent()})
+
 def contact(request):
     return render_to_response('contact.html', {'cat': 'contact' , 'recent': get_most_recent()})
 
