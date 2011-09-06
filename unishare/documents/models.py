@@ -77,7 +77,7 @@ class Document(models.Model):
         return Tag.objects.get_for_object(self)
 
     def __unicode__(self):
-        return self.name + ' - ' + self.course.name + ' - ' + self.school.name
+        return self.name + ' - ' + self.course.name + ' - ' + self.school.name + ' (' + self.file_loc + ')'
 
 class DocumentNoCaptchaForm(ModelForm):
     school = forms.CharField(max_length=100)
