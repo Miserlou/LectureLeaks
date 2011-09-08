@@ -1,0 +1,40 @@
+This guide will explain how sync the LectureLeaks audio, process it and get it listed on LectureLeaks.com.
+
+You will need:
+    * A verison of FFMpeg with 3GPP/amrnb support compiled in.
+        * This is a pain in the ass. This might help: http://blog.defunct.ca/2008/06/13/ffmpeg-mplayer-w-amr-nb-support-for-3gp/
+    * A user account on the LectureLeaks.com server
+    * A user account on LectureLeaks webapp.
+
+Once you have FFMpeg compiled and installed, sync the files by making a script called sync.sh:
+
+#! /bin/sh
+rsync -vhza --progress lectureleaks.com:/var/www/LectureLeaks/uploads/documents/* ./
+
+and chmod +x it.
+
+Then: 
+
+sync.sh > sept7
+
+and it will download the files. This will take a long time the first time you do it. sept7 will then contain the transfer data.
+
+Then go to lectureleaks.com/admin and look for new files which have school and lecture data, or look for large files (~4M or more).
+
+For that file name, use this conversion scripts:
+
+convert.sh:
+#! /bin/sh
+ffmpeg -i $1 -vcodec xvid -acodec libmp3lame -ar 44100 out.mp3
+
+out.mp3 will then contain the lecture. Open it in vlc to make sure it sounds okay, then use the
+admin interface to upload the mp3 to LectureLeaks. If the School doesn't exist yet, make sure that
+you create that School entry in the database and check all of the checkboxes available to it.
+
+If you have incomplete data for the descriptions of the files, try to use Google-fu to find out the
+information necessary. Email me if you need help here.
+
+Then upload the mp3, enter in the approrpiate data and approve it. It should now be available in the
+lectures list.
+
+Hooray!
